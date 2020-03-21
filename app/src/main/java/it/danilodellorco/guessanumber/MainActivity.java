@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +20,7 @@ public class MainActivity extends AppCompatActivity{
     String rangeMin = "0";
     String rangeMax = "100";
 
-    public class Holder implements View.OnClickListener {
+    public class Holder implements View.OnClickListener, View.OnLongClickListener {
         Button btnSubmit;
         EditText etInput;
         TextView tvTentatives;
@@ -54,6 +53,7 @@ public class MainActivity extends AppCompatActivity{
             btnImage.setImageResource(R.drawable.question);
             btnImage.setOnClickListener(this);
             btnSubmit.setOnClickListener(this);
+            btnImage.setOnLongClickListener(this);
         }
 
         @Override
@@ -121,6 +121,26 @@ public class MainActivity extends AppCompatActivity{
                     etInput.getText().clear();
                 }
             }
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            rangeMin = "0";
+            rangeMax = "200";
+            tentatives = 0;
+            cpu = new Random().nextInt(200 - 1) + 1;
+            etInput.setHint("");
+            tvChoosenNum.setText(Integer.toString(cpu));
+            tvTentatives.setText(Integer.toString(tentatives));
+            tvStatus.setVisibility(View.INVISIBLE);
+            tvChoosenNum.setVisibility(View.INVISIBLE);
+            tvChoosenText.setVisibility(View.INVISIBLE);
+            btnSubmit.setEnabled(true);
+            etInput.getText().clear();
+            btnImage.setImageResource(R.drawable.devil);
+            toast.setText("Partita Riavviata!");
+            toast.show();
+            return true;
         }
     }
 
