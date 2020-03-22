@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity{
 
             tvChoosenNum.setText(Integer.toString(cpu));
             btnImage.setImageResource(R.drawable.question);
+            btnSubmit.setEnabled(true);
 
             toast.setText("Nuova Partita!");
             toast.show();

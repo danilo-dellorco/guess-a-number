@@ -38,9 +38,6 @@ public class SettingsActivity extends AppCompatActivity {
             btnDefault = findViewById(R.id.btnDefault);
             btnDefault = findViewById(R.id.btnDefault);
             btnDefault.setOnClickListener(this);
-
-            Toast toast = Toast.makeText(getApplicationContext(), "dsfds", Toast.LENGTH_SHORT);
-            toast.show();
             arrayInitializer();
         }
 
@@ -56,21 +53,24 @@ public class SettingsActivity extends AppCompatActivity {
         public void onClick(View v) {
             SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            int min,max,ten;
+            int min = 1, max= 100 ,ten = 7;
             if (v.getId() == R.id.btnSave) {
                 min = Integer.parseInt(spMin.getSelectedItem().toString());
                 max = Integer.parseInt(spMax.getSelectedItem().toString());
+
                 if (etMaxTentatives.getText().toString().equals("")) {
                     toast.setText("Inserisci il numero di tentativi!");
                     toast.show();
+                    return;
                 }
                 ten = Integer.parseInt(etMaxTentatives.getText().toString());
             }
-            else {
+            if (v.getId() == R.id.btnDefault) {
                 min = 1;
                 max = 100;
                 ten = 7;
             }
+
             if (min<max && ten>0) {
                 editor.putInt(MIN_VALUE, min);
                 editor.putInt(MAX_VALUE, max);
