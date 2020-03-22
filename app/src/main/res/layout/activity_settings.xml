@@ -6,82 +6,94 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
-    <Button
-        android:id="@+id/btnSave"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="@+id/etMaxTentatives"
-        app:layout_constraintHorizontal_bias="0.569"
-        app:layout_constraintStart_toStartOf="@+id/Tentatives"
-        app:layout_constraintTop_toBottomOf="@+id/etMaxTentatives" />
-
-    <EditText
-        android:id="@+id/etMaxTentatives"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toEndOf="@+id/Tentatives"
-        app:layout_constraintTop_toBottomOf="@+id/spMax" />
-
-    <Spinner
-        android:id="@+id/spMin"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="104dp"
-        app:layout_constraintStart_toEndOf="@+id/tvMin"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spMax"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toEndOf="@+id/tvMax"
-        app:layout_constraintTop_toBottomOf="@+id/spMin" />
-
-    <TextView
-        android:id="@+id/Tentatives"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="50dp"
-        android:text="Maximum"
-        app:layout_constraintBottom_toBottomOf="@+id/etMaxTentatives"
-        app:layout_constraintEnd_toStartOf="@+id/etMaxTentatives"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/etMaxTentatives" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvMin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="50dp"
-        android:text="Minimum"
-        app:layout_constraintBottom_toBottomOf="@+id/spMin"
-        app:layout_constraintEnd_toStartOf="@+id/spMin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spMin"
-        app:layout_constraintVertical_bias="0.6" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp">
 
-    <TextView
-        android:id="@+id/tvMax"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginEnd="50dp"
-        android:text="Maximum"
-        app:layout_constraintBottom_toBottomOf="@+id/spMax"
-        app:layout_constraintEnd_toStartOf="@+id/spMax"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spMax"
-        app:layout_constraintVertical_bias="1.0" />
+
+            <TextView
+                android:id="@+id/tvMin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="Minimum" />
+
+            <Spinner
+                android:id="@+id/spMin"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+
+            <TextView
+                android:id="@+id/tvMax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="10dp"
+                android:text="Maximum" />
+
+            <Spinner
+                android:id="@+id/spMax"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Tentatives"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tentatives"
+                android:paddingRight="12dp"/>
+
+            <EditText
+                android:id="@+id/etMaxTentatives"
+                android:textSize = "16sp"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="15dp"
+            android:layout_gravity="center"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/btnDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Default" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

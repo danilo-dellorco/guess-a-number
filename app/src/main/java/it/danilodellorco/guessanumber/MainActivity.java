@@ -3,6 +3,7 @@ package it.danilodellorco.guessanumber;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -15,13 +16,19 @@ import android.widget.Toast;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity{
+
     int cpu = 0;
     int tentatives;
     int maxTentatives;
     int rangeMin;
     int rangeMax;
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String MIN_VALUE = "1";
+    public static final String MAX_VALUE = "100";
+    public static final String MAX_TENTS = "7";
 
-    public class Holder implements View.OnClickListener, View.OnLongClickListener {
+
+    public class Holder implements View.OnClickListener{
         Button btnSubmit;
         Button btnSettings;
         EditText etInput;
@@ -48,10 +55,33 @@ public class MainActivity extends AppCompatActivity{
 
             btnImage.setOnClickListener(this);
             btnSubmit.setOnClickListener(this);
-            btnImage.setOnLongClickListener(this);
             btnSettings.setOnClickListener(this);
 
             newGame();
+        }
+
+        public void newGame(){
+            tentatives = 0;
+
+            SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS,MODE_PRIVATE);
+            rangeMin = sharedPreferences.getInt(MIN_VALUE,1);
+            rangeMax = sharedPreferences.getInt(MAX_VALUE,100);
+            maxTentatives = sharedPreferences.getInt(MAX_TENTS,7);
+
+            cpu = new Random().nextInt(rangeMax - 1) + 1;
+            tvTentatives.setText(Integer.toString(tentatives));
+            tvMaxTentatives.setText(Integer.toString(maxTentatives));
+            etInput.setHint(rangeText(rangeMin,rangeMax));
+
+            tvChoosenNum.setVisibility(View.INVISIBLE);
+            tvChoosenText.setVisibility(View.INVISIBLE);
+            tvStatus.setVisibility(View.INVISIBLE);
+
+            tvChoosenNum.setText(Integer.toString(cpu));
+            btnImage.setImageResource(R.drawable.question);
+
+            toast.setText("Nuova Partita!");
+            toast.show();
         }
 
         @Override
@@ -111,50 +141,10 @@ public class MainActivity extends AppCompatActivity{
             }
         }
 
-        public void newGame(){
-            tentatives = 0;
-            maxTentatives = 7;
-            rangeMin = 1;
-            rangeMax = 100;
-            cpu = new Random().nextInt(100 - 1) + 1;
-            tvTentatives.setText(Integer.toString(tentatives));
-            tvMaxTentatives.setText(Integer.toString(maxTentatives));
-            etInput.setHint(rangeText(rangeMin,rangeMax));
-
-            tvChoosenNum.setVisibility(View.INVISIBLE);
-            tvChoosenText.setVisibility(View.INVISIBLE);
-            tvStatus.setVisibility(View.INVISIBLE);
-
-            tvChoosenNum.setText(Integer.toString(cpu));
-            btnImage.setImageResource(R.drawable.question);
-
-            toast.setText("Nuova Partita!");
-            toast.show();
-        }
-
         public String rangeText(int min,int max){
             return "[" + Integer.toString(min) + " - " + Integer.toString(max) + "]";
         }
 
-        @Override
-        public boolean onLongClick(View v) {
-            rangeMin = 0;
-            rangeMax = 200;
-            tentatives = 0;
-            cpu = new Random().nextInt(200 - 1) + 1;
-            etInput.setHint(rangeText(rangeMin,rangeMax));
-            tvChoosenNum.setText(Integer.toString(cpu));
-            tvTentatives.setText(Integer.toString(tentatives));
-            tvStatus.setVisibility(View.INVISIBLE);
-            tvChoosenNum.setVisibility(View.INVISIBLE);
-            tvChoosenText.setVisibility(View.INVISIBLE);
-            btnSubmit.setEnabled(true);
-            etInput.getText().clear();
-            btnImage.setImageResource(R.drawable.devil);
-            toast.setText("Partita Riavviata!");
-            toast.show();
-            return true;
-        }
     }
 
 
